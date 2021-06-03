@@ -1,5 +1,5 @@
-const express = require("express");
-const mongoose = require("mongoose");
+const express = require('express');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 // set up port
@@ -13,10 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // make public folder static 
-app.use(express.static("public"));
+app.use(express.static('public'));
 
-// direct API requests to api.js
-//app.use(require("./routes/api.js"));
+// send all traffic to controllers files to route it appropriately
+app.use(require('./controllers/'));
 
 // try connecting to DB, if it succeeds start server, else display error message
 mongoose
