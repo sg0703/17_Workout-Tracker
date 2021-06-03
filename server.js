@@ -30,3 +30,6 @@ mongoose
             console.log(`App running on port ${PORT}!`);
         })
     })
+    .catch((err) => {
+        console.log(err);
+    });
