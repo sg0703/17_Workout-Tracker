@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require('dotenv').config();
 
 // set up port
 const PORT = process.env.PORT || 3000
@@ -14,20 +15,18 @@ app.use(express.json());
 // make public folder static 
 app.use(express.static("public"));
 
-// connect to pre-configured routes
-app.use(require("./public/api.js"));
+// direct API requests to api.js
+//app.use(require("./routes/api.js"));
 
 // try connecting to DB, if it succeeds start server, else display error message
 mongoose
-    .connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
+    .connect(process.env.WORKOUT_URL, {
         useNewUrlParser: true,
-        useFindAndModify: false
+        useUnifiedTopology: true
         })
-    .then(
+    .then(() => {
+        console.log('Connected to MONGO')
         app.listen(PORT, () => {
             console.log(`App running on port ${PORT}!`);
         })
-    )
-    .catch((err) => {
-        console.log(err);
-    });
+    })
