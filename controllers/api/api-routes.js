@@ -12,6 +12,34 @@ router.post('/workouts', (req,res) => {
     });
 });
 
+router.put('/workouts/:id', async (req,res) => {
+    // pull this workout out of database
+    let currentWorkout = await Workout.findOne({ _id: req.params.id });
+    // if it doesn't exist, send back an error
+    if(!currentWorkout) {
+        return res.json('Error! Workout not found.');
+    }
+    // take exercises array out of returned data
+    // push new data into it 
+    const { exercises } = currentWorkout;
+    exercises.push(req.body);
+
+    // update record in DB with new info
+    const updatedRecord = await currentWorkout.save(
+        { exercises: exercises }
+    );
+
+    if(!updatedRecord) {
+        res.json({ message: 'Error updating record!' });
+    }
+    else {
+        // send back updated record
+        res.json(updatedRecord);
+    }
+    console.log(updatedRecord)
+});
+
+
 router.get('/workouts', async (req,res) => {
     const workouts = await Workout.find({});
 
