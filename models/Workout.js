@@ -8,7 +8,8 @@ const WorkoutSchema = new Schema ({
     },
     exercises: {
         type: Array, 
-        default: []
+        default: [],
+        require: true
     }
 });
 

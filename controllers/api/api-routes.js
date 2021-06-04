@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Workout = require('../../models/Workout');
 
+// create new workout
 router.post('/workouts', (req,res) => {
     let newWorkout = new Workout(req.body);
 
@@ -12,6 +13,7 @@ router.post('/workouts', (req,res) => {
     });
 });
 
+// add exercise to a workout
 router.put('/workouts/:id', async (req,res) => {
     // pull this workout out of database
     let currentWorkout = await Workout.findOne({ _id: req.params.id });
@@ -56,9 +58,18 @@ router.get('/workouts', async (req,res) => {
 });
 
 router.get('/workouts/range', async (req,res) => {
-    const workouts = await Workout.find({}).limit(7);
+    // return day, exercise fields AND get total exercise duration
+    let getDurations = await Workout.aggregate([
+        {
+            $project: {
+                day: 1,
+                exercises: 1,
+                totalDuration: { $sum: "$exercises.duration" }
+            }
+        }
+    ]).sort({ _id: 'desc' }).limit(7);
 
-    res.json(workouts);
+    res.json(getDurations);
 });
 
 module.exports = router;

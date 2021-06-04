@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Workout = require('../models/Workout');
+require('dotenv').config();
 
 const workoutSeed = [
   {
@@ -119,12 +120,28 @@ const workoutSeed = [
   },
 ];
 
-  Workout.insertMany(workoutSeed)
-  .then((data) => {
-    console.log(data.result.n + ' records inserted!');
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+// connect to database and insert seed data (re-wrote this)
+mongoose
+    .connect(process.env.WORKOUT_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+        })
+    .then(async () => {
+        // tell user what's going on
+        console.log('Connected to MONGO')
+        console.log('Deleting existing records before seeding...')
+
+        // delete existing data
+        await Workout.deleteMany({});
+        // seed collection
+        console.log('Inserting seed data...');
+        const insertData = await Workout.collection.insertMany(workoutSeed);
+
+        console.log(insertData.result.n + ' records inserted!');
+        process.exit(0);
+    })
+    .catch((err) => {
+      // display any errors
+      console.error(err);
+      process.exit(0);
+    });
