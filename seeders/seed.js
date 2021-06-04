@@ -133,11 +133,12 @@ mongoose
 
         // delete existing data
         await Workout.deleteMany({});
+
         // seed collection
         console.log('Inserting seed data...');
-        const insertData = await Workout.collection.insertMany(workoutSeed);
+        const { result } = await Workout.collection.insertMany(workoutSeed);
 
-        console.log(insertData.result.n + ' records inserted!');
+        console.log(result.n + ' records inserted!');
         process.exit(0);
     })
     .catch((err) => {
