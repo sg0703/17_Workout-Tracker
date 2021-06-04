@@ -1,5 +1,5 @@
+// configure frontend or user-side routes
 const router = require('express').Router();
-// import path
 const path = require('path');
 
 // deliver exercise.html for /exercise

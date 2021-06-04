@@ -1,3 +1,4 @@
+// configure api routes
 const router = require('express').Router();
 const Workout = require('../../models/Workout');
 
@@ -41,7 +42,7 @@ router.put('/workouts/:id', async (req,res) => {
     console.log(updatedRecord)
 });
 
-
+// return all workouts
 router.get('/workouts', async (req,res) => {
     // return day, exercise fields AND get total exercise duration
     let getDurations = await Workout.aggregate([
@@ -57,6 +58,7 @@ router.get('/workouts', async (req,res) => {
     res.json(getDurations);
 });
 
+// return 7 most recent workouts
 router.get('/workouts/range', async (req,res) => {
     // return day, exercise fields AND get total exercise duration
     let getDurations = await Workout.aggregate([
