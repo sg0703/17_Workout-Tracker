@@ -4,7 +4,7 @@
 
 ## Description
 
-The Fitness Tracker allows users to add a workout or update an existing workout with exercises they've completed. The app tracks your activity over time and includes graphs that display workout duration (in minutes) and how many pounds you lifted during your workouts. Frontend code provided. Wrote the API to deliver frontend files and the API to handle database requests. Uses Node.js, MongoDB Atlas, Mongoose, and Express.
+Fitness Tracker allows users to add a workout or update an existing workout with exercises they've completed. The app tracks your activity over time and includes graphs that display workout duration (in minutes) and how many pounds you lifted during your workouts. Frontend code provided. Wrote the API to deliver frontend files and the API to handle database requests. Uses Node.js, MongoDB Atlas, Mongoose, and Express.
 
 ## Table of Contents
 
