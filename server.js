@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const Workout = require('./models/Workout');
+
 // set up port
 const PORT = process.env.PORT || 3000
 
@@ -19,6 +21,7 @@ app.use(express.static('public'));
 app.use(require('./controllers/'));
 
 // try connecting to DB, if it succeeds start server, else display error message
+
 mongoose
     .connect(process.env.WORKOUT_URL, {
         useNewUrlParser: true,
@@ -26,6 +29,7 @@ mongoose
         })
     .then(() => {
         console.log('Connected to MONGO')
+
         app.listen(PORT, () => {
             console.log(`App running on port ${PORT}!`);
         })
