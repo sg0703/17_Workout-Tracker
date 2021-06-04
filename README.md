@@ -21,7 +21,7 @@ Clone the repo, set up the database, and run the seed file to get started.
 
 ## Usage
 
-Simply navigate to HEROKU URL and start adding or modifying workouts.
+Simply navigate to the [Deployed App](https://enigmatic-brook-29650.herokuapp.com/) and start adding or modifying workouts.
 
 ![Screenshot 1](assets/screen1.png)
 ![Screenshot 2](assets/screen2.png)
