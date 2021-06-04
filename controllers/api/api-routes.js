@@ -41,13 +41,22 @@ router.put('/workouts/:id', async (req,res) => {
 
 
 router.get('/workouts', async (req,res) => {
-    const workouts = await Workout.find({});
+    // return day, exercise fields AND get total exercise duration
+    let getDurations = await Workout.aggregate([
+        {
+            $project: {
+                day: 1,
+                exercises: 1,
+                totalDuration: { $sum: "$exercises.duration" }
+            }
+        }
+    ]);
 
-    res.json(workouts);
+    res.json(getDurations);
 });
 
 router.get('/workouts/range', async (req,res) => {
-    const workouts = await Workout.find({});
+    const workouts = await Workout.find({}).limit(7);
 
     res.json(workouts);
 });
