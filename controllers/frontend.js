@@ -12,7 +12,7 @@ router.get('/stats', (req,res) => {
     res.sendFile(path.join(__dirname, '../public/stats.html'));
 });
 
-// if ANYTHING else, show user index.html
+// if home route show user index.html
 router.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
